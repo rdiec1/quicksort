@@ -1,1 +1,63 @@
+PImage img;
+void setup() 
+{
+  img = loadImage("sunflower.jpg");
+  size(387,387);
+  image(img, 0, 0);
+}
+void draw() dasd
+{
+  loadPixels();
+  for (int y = 0; y < img.height -1; y++) {
+    for (int x = 0; x< img.width -1; x++) {
+      int loc = x + (y*img.width);
+      int currColor = img.pixels[loc];
+      int rF = (currColor >> 16) & 0xFF;
+      int gF = (currColor >> 8) & 0xFF;
+      int bF = currColor & 0xFF;
+      //int av = (rF+gF+bF)/3;
+      float bri = brightness(img.pixels[loc]);    
+      float h = hue(img.pixels[loc]);
+      float sat = saturation(img.pixels[loc]);
+ if ( bri>120 )
+      {
+        quicksort(pixels, loc, loc+1);
+      }
+    }
+  }
+  updatePixels();
+ 
+}
+int partition(int[] a, int l, int r) {
+  int i = l;
+  int j = r;
+  int temp;
+  int pivot = a[(i+j)/2];
+  while (i<=j) {
+    while (a[i] < pivot) {
+      i++;
+    }
+    while (a[j] > pivot) {
+      j--;
+    }
+    if (i <= j) {
+      temp = a[i];
+      a[i] = a[j];
+      a[j] = temp;
+      i++;
+      j--;
+    }
+  }
+  return i;
+}
 
+void quicksort(int x[], int left, int right) 
+{
+  int index = partition(x, left, right);
+  if (left < index - 1) {
+    quicksort(x, left, index-1);
+  }
+  if (index > right) {
+    quicksort(x, index, right);
+  }
+}
